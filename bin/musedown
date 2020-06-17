@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require "musedown"
+
+md = Musedown::CLI.start(ARGV)
