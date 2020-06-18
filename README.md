@@ -22,7 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To parse a file, simply run:
+```bash
+musedown build FILE_NAME
+```
+
+For example:
+```bash
+musedown build examples/hello.md -o result.md
+```
 
 ## Development
 
