@@ -19,17 +19,18 @@ module Musedown
             begin
                 image_file = "#{@score_file.gsub(".mscz", "-mscz")}.png"
                 result = `#{command} #{@score_file} -o #{image_file}`
-                rescue Errno::ENOENT => error
-                    puts("Error building #{@score_file}: #{error}")
-                end
-
-                if $?.success?
-                    if !prebuilt
-                        @relative_image_file = @relative_score_file.sub(/.*\K\.mscz/, "-mscz-1.png")
-                    end
-                else
-                    puts("Failed to convert #{@score_file}")
+            rescue Errno::ENOENT => error
+                puts("⚠️ Error building #{@score_file}: #{error}")
             end
+
+            if $?.success?
+                if !prebuilt
+                    @relative_image_file = @relative_score_file.sub(/.*\K\.mscz/, "-mscz-1.png")
+                end
+            else
+                puts("⚠️ Failed to convert #{@score_file}")
+            end
+            return $?.success?
         end
     end
 
@@ -40,11 +41,11 @@ module Musedown
         def build(file_name)
             output_file = file_name
             if options[:output]
-                puts("Output file will be #{options[:output]}")
+                puts("✏️  Output file will be #{options[:output]}")
                 output_file = options[:output]
             end
 
-            puts("Building file #{file_name}...")
+            puts("👷‍♂️ Building file #{file_name}...")
             contents = nil
             File.open(file_name) do |file|
                 contents = file.read
@@ -54,7 +55,7 @@ module Musedown
             prebuilt_expression = /!\[.*\]\((?<file_name>.*\-mscz-1\.png)\)/
             prebuilt_matches = contents.scan(prebuilt_expression)
 
-            puts("Found #{prebuilt_matches.length} previously built images...")
+            puts("🔍 Found #{prebuilt_matches.length} previously built images...")
             prebuilt_matches.each do |match|
                 score = Score.new(true)
                 score.relative_image_file = match[0]
@@ -66,7 +67,7 @@ module Musedown
             expression = /!\[.*\]\((?<file_name>.*\.mscz)\)/
             matches = contents.scan(expression)
 
-            puts("Found unbuilt #{matches.length} score files...")
+            puts("🔍 Found unbuilt #{matches.length} score files...")
             matches.each do |match|
                 score = Score.new(false)
                 score.relative_score_file = match[0]
@@ -75,18 +76,18 @@ module Musedown
             end
 
             scores.each do |score|
-                score.build(options[:command])
-                if !score.prebuilt
+                sucess = score.build(options[:command])
+                if !score.prebuilt and sucess
                     contents = contents.gsub(score.relative_score_file, score.relative_image_file)
                 end
             end
 
-            puts("Saving...")
+            puts("💾 Saving...")
             File.open(output_file, "w") do |file|
                 file.write(contents)
             end
 
-            puts "Done!"
+            puts "✅ Done!"
         end
     end
 end
