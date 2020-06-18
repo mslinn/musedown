@@ -22,22 +22,22 @@ module Musedown
 
     	old_expression = /!\[.*\]\((?<file_name>.*\-mscz-1\.png)\)/
     	matches = contents.scan(old_expression)
-    	file_names = {}
 
     	matches.each do |match|
     		png_name = match[0]
-    		file_name = png_name.gsub("-mscz-1.png", ".mscz")
-    		file_target = "#{file_name.gsub(".mscz", "-mscz")}.png"
+    		png_name = File.join(File.dirname(file_name), png_name)
+    		score_file = png_name.gsub("-mscz-1.png", ".mscz")
+    		png_file = "#{score_file.gsub(".mscz", "-mscz")}.png"
     		begin
-				command = `#{options[:command]} #{file_name} -o #{file_target}`
+				command = `#{options[:command]} #{score_file} -o #{png_file}`
 			rescue Errno::ENOENT => error
-				puts("Error regenerating #{file_name}: #{error}")
+				puts("Error regenerating #{score_file}: #{error}")
 			end
 			
 			if $?.success?
-				puts("Regenerated #{file_name}")
+				puts("Regenerated #{score_file}")
 			else
-				puts("Failed to regenerate #{file_name}")
+				puts("Failed to regenerate #{score_file}")
 			end
 		end
 
@@ -46,19 +46,21 @@ module Musedown
     	file_names = {}
 
     	matches.each do |match|
-    		file_name = match[0]
-    		file_target = "#{file_name.gsub(".mscz", "-mscz")}.png"
+    		score_file = match[0]
+            original_path = score_file
+    		score_file = File.join(File.dirname(file_name), score_file)
+    		png_file = "#{score_file.gsub(".mscz", "-mscz")}.png"
     		begin
-				command = `#{options[:command]} #{file_name} -o #{file_target}`
+				command = `#{options[:command]} #{score_file} -o #{png_file}`
 			rescue Errno::ENOENT => error
-				puts("Error building #{file_name}: #{error}")
+				puts("Error building #{score_file}: #{error}")
 			end
 			
 			if $?.success?
-				converted = file_target.sub(/.*\K\.png/, '-1.png')
-				file_names[file_name] = converted
+				converted = original_path.sub(/.*\K\.mscz/, '-mscz-1.png')
+				file_names[original_path] = converted
 			else
-				puts("Failed to convert #{file_name}")
+				puts("Failed to convert #{score_file}")
 			end
 		end
 
