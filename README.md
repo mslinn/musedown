@@ -2,7 +2,7 @@
 This is a simple MuseScore CLI wrapper to easily build markdown files with music notation (and preserve for changes).
 
 ## Installation
-To install the `gem` directly:
+To install the `gem` directly from [RubyGems.org](https://rubygems.org):
 ```bash
 gem install musedown
 ```
