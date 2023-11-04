@@ -12,6 +12,11 @@ module Musedown
     option(:output, type: :string, required: false, desc: 'output file', aliases: '-o')
     option(:command, type: :string, default: 'mscore', desc: 'musescore command, default: mscore', aliases: '-c')
 
+    # Return a non-zero status code on error. See https://github.com/rails/thor/issues/244
+    def self.exit_on_failure?
+      true
+    end
+
     def build(file_name)
       output_file = file_name
       if options[:output]

@@ -85,7 +85,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  debug
+  debug (>= 1.0.0)
   musedown!
   rspec
   rubocop
