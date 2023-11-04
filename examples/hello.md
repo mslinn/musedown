@@ -2,4 +2,4 @@
 
 This is my cool file.
 
-![](hello.mscz)
+![This text is not useful](hello.mscz)

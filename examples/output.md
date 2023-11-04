@@ -2,4 +2,4 @@
 
 This is my cool file.
 
-![](hello-mscz-1.png)
+![This text is not useful](hello-mscz-1.png)

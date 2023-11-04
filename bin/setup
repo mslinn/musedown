@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-set -vx
 
-bundle install
+rm -f Gemfile.lock
 
-# Do any other automated setup that you need to do here
+if [[ -z "$( which bundle )" ]]; then gem install bundler; fi
+export BUNDLE_WITH="development"
+bundle
+
+# See https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/
+# See https://linuxtut.com/visual-studio-code-i-get-a-syntax-error-when-debugging-when-using-rbenv-6ee58/
+for X in rake rspec-core rubocop ruby-debug-ide thor; do
+  bundle binstubs "$X" --force --path exe
+done

@@ -1,0 +1,87 @@
+require:
+  #  - rubocop-jekyll
+  - rubocop-md
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+
+# inherit_gem:
+#   rubocop-jekyll: .rubocop.yml
+
+AllCops:
+  Exclude:
+    - _site/**/*
+    - Gemfile*
+    - exe/**/*
+    - jekyll/**/*
+    - vendor/**/*
+  NewCops: enable
+  TargetRubyVersion: 2.6
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - _bin/**/*
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Layout/LeadingCommentSpace:
+  Exclude:
+    - _bin/**/*
+
+Layout/LineLength:
+  Max: 150
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 40
+
+Metrics/BlockLength:
+  Max: 50
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/PerceivedComplexity:
+  Max: 20
+
+Style/Alias:
+  Exclude:
+    - _plugins/symlink_watcher.rb
+    - blog/bin/avImport
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
