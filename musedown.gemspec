@@ -22,5 +22,5 @@ Gem::Specification.new do |spec|
   spec.summary               = 'A music notation markdown builder.'
   spec.version               = Musedown::VERSION
 
-  spec.add_dependency 'thor', '~> 0.20'
+  spec.add_dependency 'thor'
 end

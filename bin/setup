@@ -9,5 +9,5 @@ bundle
 # See https://www.honeybadger.io/blog/rbenv-rubygems-bundler-path/
 # See https://linuxtut.com/visual-studio-code-i-get-a-syntax-error-when-debugging-when-using-rbenv-6ee58/
 for X in rake rspec-core rubocop ruby-debug-ide thor; do
-  bundle binstubs "$X" --force --path exe
+  bundle binstubs "$X" --force --path binstub
 done
