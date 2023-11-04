@@ -2,4 +2,4 @@
 
 require 'musedown'
 
-md = Musedown::CLI.start(ARGV)
+Musedown::CLI.start(ARGV)
