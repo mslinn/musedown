@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.name                  = 'musedown'
   spec.require_paths         = ['lib']
-  spec.target_ruby_version   = Gem::Requirement.new('>= 3.0.0')
+  spec.required_ruby_version   = Gem::Requirement.new('>= 3.0.0')
   spec.summary               = 'A music notation markdown builder.'
   spec.version               = Musedown::VERSION
 
