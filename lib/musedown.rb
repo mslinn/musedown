@@ -18,7 +18,7 @@ module Musedown
         def build(command)
             begin
                 image_file = "#{@score_file.gsub(".mscz", "-mscz")}.png"
-                result = `#{command} #{@score_file} -o #{image_file}`
+                `#{command} #{@score_file} -o #{image_file}`
             rescue Errno::ENOENT => error
                 puts("⚠️ Error building #{@score_file}: #{error}")
             end
@@ -28,7 +28,7 @@ module Musedown
                     @relative_image_file = @relative_score_file.sub(/.*\K\.mscz/, "-mscz-1.png")
                 end
             else
-                puts("⚠️ Failed to convert #{@score_file}")
+                puts("⚠️ Error: Failed to convert #{@score_file}")
             end
             return $?.success?
         end

@@ -12,11 +12,10 @@ AllCops:
   Exclude:
     - _site/**/*
     - Gemfile*
-    - exe/**/*
+    - binstub/**/*
     - jekyll/**/*
     - vendor/**/*
   NewCops: enable
-  TargetRubyVersion: 2.6
 
 Gemspec/RequireMFA:
   Enabled: false
