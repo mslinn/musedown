@@ -94,4 +94,4 @@ module Musedown
   end
 end
 
-Musedown::CLI.start(ARGV) if __FILE__ == $PROGRAM_NAME
+Musedown::CLI.start if __FILE__ == $PROGRAM_NAME
