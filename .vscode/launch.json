@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "args": ["hello"],
+      "args": ["build", "hello"],
       "debugPort": "0",
       "name": "Debug musedown",
       "rdbgPath": "binstub/rdbg",

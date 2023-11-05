@@ -9,8 +9,9 @@ module Musedown
     package_name 'Musedown'
 
     desc('build [FILE_NAME]', 'build markdown file')
-    option(:output, type: :string, required: false, desc: 'output file', aliases: '-o')
-    option(:command, type: :string, default: 'mscore', desc: 'musescore command, default: mscore', aliases: '-c')
+    method_option :output, type: :string, required: false, desc: 'output file', aliases: '-o'
+
+    method_option :command, type: :string, default: 'mscore', desc: 'musescore command, default: mscore', aliases: '-c'
 
     # Return a non-zero status code on error. See https://github.com/rails/thor/issues/244
     def self.exit_on_failure?
@@ -32,6 +33,15 @@ module Musedown
       scores = collect_prebuilt_scores(output_file, contents)
       scores << collect_unbuilt_scores(output_file, contents)
       process scores
+    end
+
+    def help(command = nil, subcommand: false)
+      say <<~END_HELP
+        Musedown renders MuseScore files into PNGs.
+        More to come...
+
+      END_HELP
+      super command, subcommand
     end
 
     private
