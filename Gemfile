@@ -14,5 +14,4 @@ end
 group :test, :development do
   gem 'debug', '>= 1.0.0', require: false
   gem 'rspec', require: false
-  gem 'ruby-debug-ide', require: false
 end

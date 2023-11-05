@@ -21,7 +21,7 @@
     },
     {
       "debugPort": "0",
-      "name": "Attach rdebug-ide",
+      "name": "Attach rdbg",
       "request": "attach",
       "type": "rdbg",
     },
