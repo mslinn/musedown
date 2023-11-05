@@ -5,24 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "args": ["build", "hello"],
+      "args": ["build", "examples/hello.md"],
       "debugPort": "0",
       "name": "Debug musedown",
-      "rdbgPath": "binstub/rdbg",
+      "script": "lib/musedown.rb",
       "request": "launch",
-      "script": "${workspaceRoot}/lib/musedown.rb",
       "type": "rdbg",
       "useBundler": true,
     },
     {
-      "args": ["-h"],
-      "debugPort": "0",
       "name": "Show musedown help",
-      "rdbgPath": "binstub/rdbg",
+      "program": "${workspaceRoot}/lib/musedown.rb",
       "request": "launch",
-      "script": "${workspaceRoot}/lib/musedown.rb",
-      "type": "rdbg",
-      "useBundler": true,
+      "type": "ruby_lsp",
     },
     {
       "debugPort": "0",

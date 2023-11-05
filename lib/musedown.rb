@@ -1,6 +1,7 @@
 require 'English'
 require 'thor'
 require_relative 'musedown/version'
+require_relative 'score'
 
 module Musedown
   class CLI < Thor
@@ -8,7 +9,7 @@ module Musedown
 
     package_name 'Musedown'
 
-    desc('build [FILE_NAME]', 'build markdown file')
+    desc('build FILE_NAME', 'build markdown file')
     method_option :output, type: :string, required: false, desc: 'output file', aliases: '-o'
 
     method_option :command, type: :string, default: 'mscore', desc: 'musescore command, default: mscore', aliases: '-c'
@@ -35,6 +36,8 @@ module Musedown
       process scores
     end
 
+    default_task :build
+
     def help(command = nil, subcommand: false)
       say <<~END_HELP
         Musedown renders MuseScore files into PNGs.
@@ -53,7 +56,7 @@ module Musedown
 
       say "🔍 Found #{prebuilt_matches.length} previously built images...", :green
       prebuilt_matches.each do |match|
-        score = Score.new(true)
+        score = Score.new prebuilt: true
         score.relative_image_file = match[0]
         resolved_image_file = File.join(File.dirname(output_file), score.relative_image_file)
         score.score_file = resolved_image_file.gsub('-mscz-1.png', '.mscz')
@@ -68,7 +71,7 @@ module Musedown
       matches = contents.scan(expression)
       say "🔍 Need to build #{matches.length} score files...", :green
       matches.each do |match|
-        score = Score.new(false)
+        score = Score.new prebuilt: false
         score.relative_score_file = match[0]
         score.score_file = File.join(File.dirname(output_file), score.relative_score_file)
         scores << score
@@ -78,7 +81,7 @@ module Musedown
 
     def process(scores)
       scores.each do |score|
-        sucess = score.build(options[:command])
+        sucess = score.build options[:command]
         next unless sucess
 
         save score, output_file, contents

@@ -3,7 +3,7 @@ module Musedown
     attr_accessor :relative_image_file, :relative_score_file, :score_file
     attr_reader :prebuilt
 
-    def initialize(prebuilt)
+    def initialize(prebuilt: false)
       @score_file = nil
       @relative_score_file = nil
       @relative_image_file = nil
